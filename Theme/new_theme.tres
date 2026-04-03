@@ -1,0 +1,24 @@
+[gd_resource type="Theme" format=3 uid="uid://cbh3iln58skp8"]
+
+[ext_resource type="FontFile" uid="uid://chelnane5wghs" path="res://Assets/Fonts/ZCOOL-Wenyi.ttf" id="1_osiix"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osiix"]
+bg_color = Color(0.24172729, 0.24892664, 0.2471636, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[resource]
+CherryLabel/base_type = &"Label"
+CherryLabel/font_sizes/font_size = 36
+Label/colors/font_outline_color = Color(0.29623628, 0.6256371, 0.738937, 1)
+Label/constants/outline_size = 24
+Label/font_sizes/font_size = 50
+Label/fonts/font = ExtResource("1_osiix")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_osiix")
+coinLabel/base_type = &"Label"

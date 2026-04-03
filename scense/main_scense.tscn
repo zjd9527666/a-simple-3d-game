@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://l1llgbk7pf8t"]
+
+[ext_resource type="PackedScene" uid="uid://bxfrflnxtv4lo" path="res://scense/character_body_3d.tscn" id="1_u5s0d"]
+[ext_resource type="PackedScene" uid="uid://lo51mafuc23q" path="res://scense/ground.tscn" id="2_manbm"]
+[ext_resource type="Script" uid="uid://v36oev8q6a0r" path="res://scense/code/game_manager.gd" id="4_d6av6"]
+[ext_resource type="Script" uid="uid://dojqqfa23rvnt" path="res://scense/code/jump_pad.gd" id="5_5onsg"]
+[ext_resource type="PackedScene" uid="uid://b6nnb1jclkfen" path="res://Assets/Models/Primitive_Floor.gltf" id="6_f6bbi"]
+[ext_resource type="PackedScene" uid="uid://dyxog2yvpxppy" path="res://scense/collectible.tscn" id="7_f6bbi"]
+[ext_resource type="Texture2D" uid="uid://brhlh3memji7q" path="res://Assets/Textures/diamond_icon.png" id="8_wi6lv"]
+[ext_resource type="Theme" uid="uid://cbh3iln58skp8" path="res://Theme/new_theme.tres" id="9_t36ia"]
+[ext_resource type="Texture2D" uid="uid://bqgpioi5tjkf" path="res://Assets/Textures/cherry_icon.png" id="10_e3ykb"]
+[ext_resource type="Texture2D" uid="uid://bte7frdv6akad" path="res://Assets/Textures/coin_icon.png" id="11_5oucl"]
+[ext_resource type="PackedScene" uid="uid://siqlavxmmpph" path="res://scense/npc.tscn" id="11_e3ykb"]
+[ext_resource type="PackedScene" uid="uid://dxskgxdbmfdtc" path="res://scense/enemy.tscn" id="12_5oucl"]
+[ext_resource type="Script" uid="uid://cbtpgblaqwh6r" path="res://scense/code/combat_manager.gd" id="13_combat"]
+[ext_resource type="PackedScene" uid="uid://bnf3kqqehx2ad" path="res://scense/ui/combat_ui.tscn" id="14_combatui"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5s0d"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_f8cl6"]
+sky_material = SubResource("ProceduralSkyMaterial_u5s0d")
+
+[sub_resource type="Environment" id="Environment_oqky3"]
+background_mode = 2
+sky = SubResource("Sky_f8cl6")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_wi6lv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wi6lv"]
+size = Vector3(3, 0.881958, 3)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5onsg"]
+direction = Vector3(0, 1, 0)
+spread = 88.302
+initial_velocity_min = 5.0
+initial_velocity_max = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f6bbi"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wi6lv"]
+material = SubResource("StandardMaterial3D_f6bbi")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="MainScense" type="Node3D" unique_id=1153675855]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=902574936]
+environment = SubResource("Environment_oqky3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=604166762]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 2.4411001, 0, -2)
+shadow_enabled = true
+
+[node name="Player" parent="." unique_id=995667706 instance=ExtResource("1_u5s0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6557083, 2.353489, 4.8635406)
+
+[node name="ground" parent="." unique_id=2039667438 instance=ExtResource("2_manbm")]
+
+[node name="deathZone" type="Area3D" parent="." unique_id=1045102161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.447548, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="deathZone" unique_id=1566301916]
+shape = SubResource("WorldBoundaryShape3D_wi6lv")
+
+[node name="gameManager" type="Area3D" parent="." unique_id=344557543 node_paths=PackedStringArray("item_labels")]
+script = ExtResource("4_d6av6")
+item_labels = {
+"CHERRY": NodePath("../UI/PanelContainer/VBoxContainer/HBoxContainer3/cherryNumber"),
+"COIN": NodePath("../UI/PanelContainer/VBoxContainer/HBoxContainer2/coinNumber"),
+"DIAMOND": NodePath("../UI/PanelContainer/VBoxContainer/HBoxContainer4/diamondNumber")
+}
+
+[node name="jumpPad" type="Area3D" parent="." unique_id=1006167262 node_paths=PackedStringArray("particle_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7402515, 0, -12)
+script = ExtResource("5_5onsg")
+particle_system = NodePath("GPUParticles3D")
+metadata/_edit_group_ = true
+
+[node name="Primitive_Floor2" parent="jumpPad" unique_id=1291179088 instance=ExtResource("6_f6bbi")]
+transform = Transform3D(0.835, 0, 0, 0, 0.835, 0, 0, 0, 0.835, 0, -0.43937898, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="jumpPad" unique_id=1970573605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.059020996, 0)
+shape = SubResource("BoxShape3D_wi6lv")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="jumpPad" unique_id=1368310964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7241943, 0)
+emitting = false
+amount = 13
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_5onsg")
+draw_pass_1 = SubResource("BoxMesh_wi6lv")
+
+[node name="collect" type="Area3D" parent="." unique_id=1739788874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4885511, 0)
+
+[node name="collectible3" parent="collect" unique_id=1160964984 instance=ExtResource("7_f6bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.98426, 1.9251404, 24.613422)
+
+[node name="collectible2" parent="collect" unique_id=1663061605 instance=ExtResource("7_f6bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.646484, 2, 21.726137)
+
+[node name="collectible" parent="collect" unique_id=1796658554 instance=ExtResource("7_f6bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.33905, 2.8252926, 28.20882)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=321782705]
+
+[node name="PanelContainer" type="PanelContainer" parent="UI" unique_id=1013389364]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -125.0
+offset_bottom = 199.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer" unique_id=588813864]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer" unique_id=2046979084]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="coin" type="TextureRect" parent="UI/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=42712030]
+layout_mode = 2
+texture = ExtResource("11_5oucl")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="coinNumber" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=523478331]
+layout_mode = 2
+theme = ExtResource("9_t36ia")
+theme_override_font_sizes/font_size = 24
+text = "0
+"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer" unique_id=196531202]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="cherry" type="TextureRect" parent="UI/PanelContainer/VBoxContainer/HBoxContainer3" unique_id=1778407191]
+layout_mode = 2
+texture = ExtResource("10_e3ykb")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="cherryNumber" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer3" unique_id=1695002873]
+layout_mode = 2
+theme = ExtResource("9_t36ia")
+theme_override_font_sizes/font_size = 24
+text = "0
+"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer" unique_id=1856692328]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="diamond" type="TextureRect" parent="UI/PanelContainer/VBoxContainer/HBoxContainer4" unique_id=603429947]
+layout_mode = 2
+texture = ExtResource("8_wi6lv")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="diamondNumber" type="Label" parent="UI/PanelContainer/VBoxContainer/HBoxContainer4" unique_id=1887749649]
+layout_mode = 2
+theme = ExtResource("9_t36ia")
+theme_override_font_sizes/font_size = 24
+text = "0
+"
+
+[node name="NPC" parent="." unique_id=591104158 instance=ExtResource("11_e3ykb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.585042, 8.009236, -29.354534)
+
+[node name="Enemy" parent="." unique_id=121422471 instance=ExtResource("12_5oucl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.559144, 0)
+
+[node name="CombatManager" type="Node" parent="." unique_id=2100000001]
+script = ExtResource("13_combat")
+
+[node name="CombatUI" parent="." unique_id=2100000002 instance=ExtResource("14_combatui")]
+
+[connection signal="body_entered" from="deathZone" to="gameManager" method="respawn_player"]
+[connection signal="body_entered" from="jumpPad" to="jumpPad" method="_on_body_entered"]
+[connection signal="combat_ended" from="CombatManager" to="CombatUI" method="_on_combat_ended"]
+[connection signal="combat_started" from="CombatManager" to="CombatUI" method="_on_combat_started"]
+[connection signal="enemy_hp_changed" from="CombatManager" to="CombatUI" method="set_enemy_hp"]
+[connection signal="player_hp_changed" from="CombatManager" to="CombatUI" method="set_player_hp"]

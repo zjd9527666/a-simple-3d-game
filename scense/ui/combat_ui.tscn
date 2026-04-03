@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://bnf3kqqehx2ad"]
+
+[ext_resource type="Script" uid="uid://kwkhn2rqbg6v" path="res://scense/ui/combat_ui.gd" id="1_combatui"]
+[ext_resource type="Theme" uid="uid://cbh3iln58skp8" path="res://Theme/new_theme.tres" id="2_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0, 0, 0, 0.55)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_player"]
+bg_color = Color(0.75, 0.12, 0.12, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_enemy"]
+bg_color = Color(0.78, 0.64, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="CombatUI" type="CanvasLayer" unique_id=1834985217]
+script = ExtResource("1_combatui")
+
+[node name="Root" type="Control" parent="." unique_id=275748466]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_theme")
+
+[node name="PlayerBar" type="ProgressBar" parent="Root" unique_id=791576614]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 420.0
+offset_bottom = 56.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_player")
+value = 100.0
+show_percentage = false
+
+[node name="EnemyBar" type="ProgressBar" parent="Root" unique_id=236768836]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 68.0
+offset_right = 420.0
+offset_bottom = 100.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_enemy")
+value = 100.0
+show_percentage = false
+
+[node name="EnemyName" type="Label" parent="Root" unique_id=552484063]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 102.0
+offset_right = 420.0
+offset_bottom = 132.0
+text = "敌人"

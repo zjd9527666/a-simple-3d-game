@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://lo51mafuc23q"]
+
+[ext_resource type="PackedScene" uid="uid://buaugca6eww8k" path="res://Assets/Character/map/Map.glb" id="1_ceahn"]
+
+[node name="ground" type="Node3D" unique_id=2039667438]
+
+[node name="many_ground" type="Node3D" parent="." unique_id=794879699]
+
+[node name="convert" parent="." unique_id=430192550 instance=ExtResource("1_ceahn")]
+transform = Transform3D(75, 0, 0, 0, 75, 0, 0, 0, 75, 0, 0, 0)

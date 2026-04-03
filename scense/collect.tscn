@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://og6fnbmuvfk3"]
+
+[ext_resource type="PackedScene" uid="uid://dyxog2yvpxppy" path="res://scense/collectible.tscn" id="1_eqvnl"]
+
+[node name="collect" type="Area3D" unique_id=2072248783]
+
+[node name="collectible3" parent="." unique_id=1796658554 instance=ExtResource("1_eqvnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.98426, 0, -25)
+
+[node name="collectible2" parent="." unique_id=1635250323 instance=ExtResource("1_eqvnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0407257, 0, -25)
+
+[node name="collectible" parent="." unique_id=1788171920 instance=ExtResource("1_eqvnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.191493, 0, -12)

@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://d2c0k2qk8y4a1"]
+
+[ext_resource type="Script" path="res://scense/ui/enemy_chat_ui.gd" id="1_0x4bq"]
+[ext_resource type="Theme" path="res://Theme/new_theme.tres" id="2_0x4bq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m0p2"]
+bg_color = Color(0.02, 0.02, 0.02, 0.9)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.74, 0.62, 0.31, 0.95)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_battle"]
+bg_color = Color(0.01, 0.01, 0.01, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.82, 0.69, 0.34, 0.95)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="EnemyChatUI" type="CanvasLayer"]
+script = ExtResource("1_0x4bq")
+
+[node name="Root" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_0x4bq")
+
+[node name="Prompt" type="Label" parent="Root"]
+anchors_preset = 14
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -110.0
+offset_right = 240.0
+offset_bottom = -70.0
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 32
+text = "靠近可交谈，按 F 开口"
+
+[node name="Panel" type="PanelContainer" parent="Root"]
+anchors_preset = 14
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -480.0
+offset_top = -360.0
+offset_right = 480.0
+offset_bottom = -120.0
+visible = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_2m0p2")
+
+[node name="VBox" type="VBoxContainer" parent="Root/Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = -18.0
+theme_override_constants/separation = 10
+
+[node name="History" type="RichTextLabel" parent="Root/Panel/VBox"]
+custom_minimum_size = Vector2(0, 220)
+bbcode_enabled = true
+scroll_active = true
+scroll_following = true
+fit_content = true
+theme_override_font_sizes/normal_font_size = 30
+text = "[color=light_gray]（你靠近了对方，江湖气息扑面。）[/color]\n"
+
+[node name="Hint" type="Label" parent="Root/Panel/VBox"]
+theme_override_font_sizes/font_size = 24
+text = "Enter 发送｜Esc 退出"
+
+[node name="InputRow" type="HBoxContainer" parent="Root/Panel/VBox"]
+theme_override_constants/separation = 10
+
+[node name="Input" type="LineEdit" parent="Root/Panel/VBox/InputRow"]
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+placeholder_text = "按 F 开始输入…"
+
+[node name="Send" type="Button" parent="Root/Panel/VBox/InputRow"]
+theme_override_font_sizes/font_size = 26
+text = "发送"
+
+[node name="Http" type="HTTPRequest" parent="Root/Panel/VBox"]
+
+[node name="BattlePanel" type="PanelContainer" parent="Root"]
+anchors_preset = 14
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -170.0
+offset_right = 320.0
+offset_bottom = -100.0
+visible = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_battle")
+
+[node name="BattleText" type="Label" parent="Root/BattlePanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 34
+text = "哈哈哈，来战！"
+

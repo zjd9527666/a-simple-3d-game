@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://c3q4k5m6n7p8q"]
+
+[ext_resource type="Script" path="res://scense/vfx/slash_vfx.gd" id="1_script"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_slash"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 0, -1)
+spread = 35.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -2.5, 0)
+scale_min = 0.6
+scale_max = 1.1
+color = Color(1, 0.85, 0.35, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glow"]
+shading_mode = 0
+transparency = 1
+albedo_color = Color(1, 0.9, 0.4, 0.9)
+emission_enabled = true
+emission = Color(1, 0.85, 0.3, 1)
+emission_energy_multiplier = 2.5
+blend_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_quad"]
+size = Vector2(0.08, 0.08)
+material = SubResource("StandardMaterial3D_glow")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arc"]
+shading_mode = 0
+transparency = 1
+albedo_color = Color(1, 0.88, 0.26, 1)
+emission_enabled = true
+emission = Color(1, 0.8, 0.2, 1)
+emission_energy_multiplier = 4.0
+blend_mode = 1
+cull_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_arc"]
+size = Vector2(1.4, 0.28)
+material = SubResource("StandardMaterial3D_arc")
+
+[node name="SlashVFX" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Arc" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.35, 0, 0, 0, 1, 0, 0.02, 0)
+mesh = SubResource("QuadMesh_arc")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+emitting = true
+one_shot = true
+amount = 28
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_slash")
+draw_pass_1 = SubResource("QuadMesh_quad")
+

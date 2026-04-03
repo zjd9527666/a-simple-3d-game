@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dyxog2yvpxppy"]
+
+[ext_resource type="Script" uid="uid://kpty52p1n8dv" path="res://scense/code/collectible.gd" id="1_qdtto"]
+[ext_resource type="PackedScene" uid="uid://dkcbk11swng6l" path="res://Assets/Models/collectible_diamond.glb" id="2_dyilw"]
+[ext_resource type="PackedScene" uid="uid://bt3ju86nh66bm" path="res://Assets/Models/collectible_coin.gltf" id="3_1yyeu"]
+[ext_resource type="PackedScene" uid="uid://bhdutb81jpumh" path="res://Assets/Models/collectible_cherry.glb" id="4_uhf00"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1yyeu"]
+radius = 0.6289069
+
+[node name="collectible" type="Area3D" unique_id=1796658554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020395994, 0)
+script = ExtResource("1_qdtto")
+type = 1
+Dimaond_model = ExtResource("2_dyilw")
+Coin_model = ExtResource("3_1yyeu")
+Cherry_model = ExtResource("4_uhf00")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=985191864]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.3403463, 0)
+light_color = Color(1, 1, 0.4392157, 1)
+light_energy = 5.315
+spot_range = 4.7840023
+spot_angle = 33.641937
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=715511467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24084663, 0)
+shape = SubResource("SphereShape3D_1yyeu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

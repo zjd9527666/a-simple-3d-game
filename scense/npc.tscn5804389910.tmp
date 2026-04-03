@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://siqlavxmmpph"]
+
+[ext_resource type="PackedScene" path="res://Assets/Character/a-dog.glb" id="1_i61md"]
+[ext_resource type="Script" uid="uid://bqomsucrytv6e" path="res://scense/code/npc.gd" id="1_m46ns"]
+[ext_resource type="Script" uid="uid://donfksuorbp22" path="res://scense/code/a_dog.gd" id="2_gtuah"]
+
+[node name="NPC" type="CharacterBody3D" unique_id=591104158]
+script = ExtResource("1_m46ns")
+
+[node name="a-dog" parent="." unique_id=812321494 instance=ExtResource("1_i61md")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6665282, 0)
+script = ExtResource("2_gtuah")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=248461569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6438476, 1.6378661)
