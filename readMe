@@ -1,1 +1,7 @@
   基于cursor+gemini+nano banana + deepseek制作了一个简单的3d小游戏；
+
+nano banana负责生产3d资产；
+deepseek负责提供api接入给npc；
+cursor用于开发；
+一个简单武斗游戏；在和npc对话并展示出强烈对战欲望时会进入战斗；
+PS：游戏比较粗糙，有挺多地方不是很完善；鼠标在运行游戏后被隐藏了，按Tab键可以重新唤出
